@@ -3,3 +3,4 @@
 - Nộp file báo cáo và tiến hành thực hiện theo kế hoạch
 - Tuần 1:
 + Tìm hiểu ASP.NET Core MVC và cấu trúc của dự án
++ Đã tạo repository và đưa file đề cương lên
