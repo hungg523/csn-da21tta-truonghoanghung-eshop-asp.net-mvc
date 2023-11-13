@@ -9,3 +9,4 @@
 + Phân tích giao diện của website (đã hoàn thành)
 + Xây dựng cơ sở dữ liệu cho website (đã hoàn thành)
 #### Tuần 2:
++ Xây dựng trang chủ của website. (Đang tiến hành)
