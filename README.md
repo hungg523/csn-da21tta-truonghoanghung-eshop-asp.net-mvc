@@ -10,5 +10,5 @@
 + Xây dựng cơ sở dữ liệu cho website (đã hoàn thành)
 #### Tuần 2:
 + Xây dựng trang chủ của website. (Đã hoàn thành)
-+ Xây dựng trang sản phẩm (Đang tiến hành 70%)
-+ Xây dựng trang chi tiết sản phẩm (Đang tiến hành 50%)
++ Xây dựng trang sản phẩm (Đã hoàn thành)
++ Xây dựng trang chi tiết sản phẩm (Đang tiến hành 80%)
