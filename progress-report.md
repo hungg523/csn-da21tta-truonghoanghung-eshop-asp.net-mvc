@@ -11,4 +11,5 @@
 #### Tuần 2:
 + Xây dựng trang chủ của website. (Đã hoàn thành)
 + Xây dựng trang sản phẩm (Đã hoàn thành)
-+ Xây dựng trang chi tiết sản phẩm (Đang tiến hành 80%)
++ Xây dựng trang chi tiết sản phẩm (Đã hoàn thành)
++ Tạo chức năng cho phép người dùng bình luận và đánh giá sản phẩm (Đang tiến hành)
