@@ -8,3 +8,4 @@
 # Tuần 2:
 + Xây dựng trang chủ của website. (Đã hoàn thành)
 + Xây dựng trang sản phẩm (Đã hoàn thành)
++ Xây dựng trang chi tiết sản phẩm (Đã hoàn thành)
