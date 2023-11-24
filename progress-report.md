@@ -12,4 +12,9 @@
 + Xây dựng trang chủ của website. (Đã hoàn thành)
 + Xây dựng trang sản phẩm (Đã hoàn thành)
 + Xây dựng trang chi tiết sản phẩm (Đã hoàn thành)
+#### Tuần 3:
 + Tạo chức năng cho phép người dùng bình luận và đánh giá sản phẩm (Đang tiến hành)
+#### Tuần 4:
++ Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đang tiến hành)
+#### Tuần kết thúc:
++ Hoàn thành quyển báo cáo (Đang tiến hành)
