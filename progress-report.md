@@ -14,8 +14,8 @@
 + Xây dựng trang chi tiết sản phẩm (Đã hoàn thành)
 #### Tuần 3:
 + Tạo chức năng cho phép người dùng bình luận và đánh giá sản phẩm (Đã hoàn thành)
-+ Tạo chức năng cho phép người quản trị phản hổi yêu cầu của khách hàng (Đang tiến hành)
++ Tạo chức năng cho phép người quản trị phản hổi yêu cầu của khách hàng (Đã hoàn thành)
 #### Tuần 4:
-+ Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đang tiến hành)
++ Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đã hoàn thành)
 #### Tuần kết thúc:
 + Hoàn thành quyển báo cáo (Đang tiến hành)
