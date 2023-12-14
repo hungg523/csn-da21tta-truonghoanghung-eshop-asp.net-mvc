@@ -18,4 +18,4 @@
 #### Tuần 4:
 + Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đã hoàn thành)
 #### Tuần kết thúc:
-+ Hoàn thành quyển báo cáo (Đang tiến hành)
++ Hoàn thành quyển báo cáo (Đang tiến hành 60%)
