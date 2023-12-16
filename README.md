@@ -14,5 +14,6 @@
 + Tạo chức năng cho phép người quản trị phản hổi yêu cầu của khách hàng (Đã hoàn thành)
 # Tuần 4:
 + Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đã hoàn thành)
-# Đã hoàn thành xong trang web:
-http://hung52304-001-site1.etempurl.com/
+# Tuần kết thúc:
++ Hoàn thành quyển báo cáo (Đã hoàn thành)
++ Đã đưa website lên host: http://hung52304-001-site1.etempurl.com/
