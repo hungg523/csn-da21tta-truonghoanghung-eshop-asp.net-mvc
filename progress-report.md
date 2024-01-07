@@ -18,4 +18,4 @@
 + Xây dựng trang quảng trị để quản lý sản phẩm và người dùng cho quản trị viên (Đã hoàn thành vào ngày 22/12/2023)
 #### Tuần kết thúc:
 + Hoàn thành quyển báo cáo (Đã hoàn thành vào ngày 29/12/2023)
-+ Đã đưa website lên host (Đã hoàn thành vào ngày 29/12/2023)
++ Đã đưa website lên host: http://hung52304-001-site1.etempurl.com/ (Đã hoàn thành vào ngày 29/12/2023)
