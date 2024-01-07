@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HungApple.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminPanel";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="w3-card w3-round w3-white">
+    <table class="w3-container w3-padding">
+        <thead class="w3-border w3-padding">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="w3-border w3-padding">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="w3-button w3-theme-d1 w3-margin-bottom">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" class="w3-button w3-theme-d1 w3-margin-bottom">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="w3-button w3-theme-d1 w3-margin-bottom">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,196 @@
+﻿@{
+    var controller = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+    var idSection = (controller.Equals("products") ? "breadcrumb" : "");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>@ViewBag.Title - Hung Apple</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
+
+    <link type="text/css" rel="stylesheet" href="/css/btnminmax.css" />
+    <link type="text/scss" rel="stylesheet" href="/scss/btnminmax.scss" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- HEADER -->
+    @await Html.PartialAsync("_HeaderPartial")
+    <!-- /HEADER -->
+    <!-- NAVIGATION -->
+    @await Component.InvokeAsync("Navbar")
+    @if (controller.Equals("home"))
+    {
+        <div id="hot-deal" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="hot-deal">
+                           
+                            <ul class="hot-deal-countdown" id="countdown">
+                                <li>
+                                    <div>
+                                        <h3 id="days">02</h3>
+                                        <span>Ngày</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h3 id="hours">10</h3>
+                                        <span>Giờ</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h3 id="minutes">34</h3>
+                                        <span>Phút</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h3 id="seconds">60</h3>
+                                        <span>Giây</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span>Mới</span>
+                            <h2 class="text-uppercase" style="color:#fff">iPhone 15</h2>
+                            <p style="color:#fff">Giá chỉ từ 19990000 VND</p>
+                            <a class="primary-btn cta-btn" href="/Products/Index">Mua ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+    }
+    <div class="section" id="@idSection">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            @RenderBody()
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+    <!-- SECTION -->
+    <div class="section">
+        <div id="newsletter" class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="newsletter">
+                            <p>Đăng ký để nhận <strong>Thư Mới</strong></p>
+                            <form action="/Users/Subscribe">
+                                <input class="input" type="email" name="email" placeholder="Nhập email">
+                                <button class="newsletter-btn" type="submit" onclick="successFunction()"><i class="fa fa-envelope"></i> Đăng ký</button>
+                            </form>
+                            <ul class="newsletter-follow">
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+    </div>
+    <!-- /NEWSLETTER -->
+    <!-- FOOTER -->
+    @await Html.PartialAsync("_FooterPartial")
+    <!-- /FOOTER -->
+    <!-- jQuery Plugins -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/nouislider.min.js"></script>
+    <script src="/js/jquery.zoom.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/btnminmax.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function successFunction() {
+            Swal.fire({
+                title: "Đăng ký thành công!",
+                icon: "success",
+                showConfirmButton: false
+            });
+        }
+        // Set the target date and time (YYYY, MM, DD, HH, MM, SS)
+        const targetDate = new Date('2024-01-31T18:00:00').getTime();
+
+        // Update the countdown every 1 second
+        const countdown = setInterval(function () {
+            const currentDate = new Date().getTime();
+            const timeLeft = targetDate - currentDate;
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Update the HTML elements with the calculated values
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            // Check if the countdown has reached zero
+            if (timeLeft <= 0) {
+                clearInterval(countdown); // Stop the countdown when it reaches zero
+                // You can add any action you want to perform when the countdown ends here
+            }
+        }, 1000); // Update every 1 second
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

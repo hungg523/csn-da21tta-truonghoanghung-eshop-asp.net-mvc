@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HungApple.Models.User
+@{
+    ViewData["Title"] = "Đăng ký";
+    Layout = "_Form";
+}
+<form asp-action="Register" asp-controller="Users">
+    <div class="form-group">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" class="form-control" name="Username" asp-for="Username">
+    </div>
+    <div class="form-group">
+        <label for="email">Địa chỉ Email</label>
+        <input type="email" class="form-control" name="Email" asp-for="Email">
+        @* <small class="form-text text-muted">We'll never share your email with anyone else.</small> *@
+    </div>
+    <div class="form-group">
+        <label for="phone">Số điện thoại</label>
+        <input type="number" class="form-control" name="Phone" asp-for="Phone">
+    </div>
+    <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input type="password" class="form-control" name="Password" asp-for="Password">
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword">Xác nhận mật khẩu</label>
+        <input type="password" class="form-control" name="ConfirmPassword" asp-for="ConfirmPassword">
+    </div>
+    <button type="submit" class="btn btn-primary">Đăng ký</button>
+    <a asp-action="Login" asp-controller="Users">Đã có tài khoản? Đăng nhập</a>
+</form>

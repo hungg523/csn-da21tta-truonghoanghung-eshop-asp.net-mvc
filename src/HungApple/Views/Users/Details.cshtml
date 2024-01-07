@@ -1,0 +1,82 @@
+﻿@model HungApple.Models.User
+
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lstProvinces = (List<HungApple.Models.Provinces>)ViewBag.ListProvinces;
+    var lstDistricts = (List<HungApple.Models.Districts>)ViewBag.ListDistricts;
+    var lstWards = (List<HungApple.Models.Wards>)ViewBag.ListWards;
+}
+<form asp-action="Details" asp-controller="Users" enctype="multipart/form-data">
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <label class="text-success">@ViewBag.Success</label>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <label class="text-danger">@ViewBag.Error</label>
+    }
+    <input type="hidden" asp-for="@Model.Id" />
+    <div class="form-group">
+        <label>Tên tài khoản</label>
+        <input type="text" class="form-control" asp-for="@Model.Username" readonly>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" asp-for="@Model.Email">
+    </div>
+    <div class="form-group">
+        <label>Số điện thoại</label>
+        <input type="text" class="form-control" asp-for="@Model.Phone">
+    </div>
+    <div class="form-group">
+        <label>Tỉnh/Thành phố</label>
+        <select class="form-control" asp-for="@Model.ProvinceId" id="sltProvinceId">
+            <option value="0">--Chọn tỉnh/tp--</option>
+            @if (lstProvinces != null && lstProvinces.Count > 0)
+            {
+                foreach (var item in lstProvinces)
+                {
+                    <option value="@item.province_id">@item.province_name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Quận/Huyện</label>
+        <select class="form-control" asp-for="@Model.DistrictId" id="sltDistrictId">
+            <option value="0">--Chọn Quận/Huyện--</option>
+            @if (lstDistricts != null && lstDistricts.Count > 0)
+            {
+                foreach (var item in lstDistricts)
+                {
+                    <option value="@item.district_id">@item.district_name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Xã/Phường</label>
+        <select class="form-control" asp-for="@Model.WardId" id="sltWardId">
+            <option value="0">--Chọn Phường/Xã--</option>
+            @if (lstWards != null && lstWards.Count > 0)
+            {
+                foreach (var item in lstWards)
+                {
+                    <option value="@item.ward_id">@item.ward_name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ảnh</label>
+        <input type="file" class="form-control" name="fileImage">
+        @if(!string.IsNullOrEmpty(Model.ImagePath)){
+            <img src="/Upload/Avatar/@Model.ImagePath" alt="Ảnh đại diện" width="50" height="50"/>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+</form>
+@section Scripts{
+   <script src="~/js/controller/users.js" asp-append-version="true"></script>
+}

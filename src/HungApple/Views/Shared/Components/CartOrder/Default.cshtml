@@ -1,0 +1,23 @@
+﻿@model Cart
+
+
+@if (Model?.Lines != null)
+{
+	@foreach (var line in Model?.Lines)
+	{
+		<div class="order-products">
+			<div class="order-col">
+				<div>@line.Quantity @line.Product.Name màu @line.Product.Color</div>
+				<div>@(line.Product.Price - line.Product.PriceDiscount) VND</div>
+			</div>
+		</div>
+	}
+}
+<div class="order-col">
+	<div>Phí vận chuyển</div>
+	<div><strong>30000 VND</strong></div>
+</div>
+<div class="order-col">
+	<div><strong>Tổng cộng</strong></div>
+	<div><strong class="order-total">@(Model?.ComputeTotalValue() + 30000) VND</strong></div>
+</div>

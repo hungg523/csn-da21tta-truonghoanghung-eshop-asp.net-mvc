@@ -1,0 +1,50 @@
+﻿@model Cart
+
+<div class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+		<i style="pointer: cursor" class="fa fa-shopping-cart"></i>
+		<span>Giỏ hàng</span>
+		@if (@Model?.Lines != null)
+		{
+			<div class="qty">@Model?.Lines.Count</div>
+		}
+	</a>
+	<div class="cart-dropdown">
+		<div class="cart-list">
+			@if (Model?.Lines != null)
+			{
+				@foreach (var line in Model?.Lines)
+				{
+					<div class="product-widget">
+						<div class="product-img">
+							<img src="/Upload/Product/@line.Product.Image" alt="">
+						</div>
+						<div class="product-body">
+							<h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@line.Product.Id">@line.Product.Name</a></h3>
+							<h4 class="product-price"><span class="qty">@line.Quantity</span>@(line.Product.Price - line.Product.PriceDiscount) VND</h4>
+						</div>
+						<a href="/Cart/RemoveFromCart/?id=@line.Product.Id" class="delete"><i class="fa fa-close"></i></a>
+					</div>
+				}
+			}
+		</div>
+		@if (Model?.Lines != null)
+		{
+			<div class="cart-summary">
+				<small>@Model?.Lines.Count sản phẩm đã chọn!</small>
+				<h5>Tổng thanh toán: @Model?.ComputeTotalValue() VND</h5>
+			</div>
+		}
+		else
+		{
+			<div class="cart-summary">
+				<small>0 sản phẩm đã chọn!</small>
+				<h5>Tổng thanh toán: 0 VND</h5>
+			</div>
+		}
+		<div class="cart-btns">
+			<a href="/Cart">Xem giỏ hàng</a>
+			<a href="/Orders">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
+		</div>
+	</div>
+</div>

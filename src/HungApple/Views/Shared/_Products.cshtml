@@ -1,0 +1,157 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>@ViewBag.Title</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/css/style.css" />
+
+</head>
+<body>
+	<!-- HEADER -->
+	@await Html.PartialAsync("_HeaderPartial")
+	<!-- /HEADER -->
+	<!-- NAVIGATION -->
+	@await Component.InvokeAsync("Navbar")
+	<!-- /NAVIGATION -->
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="breadcrumb-tree">
+						<li><a href="/Home">Trang chủ</a></li>
+						<li><a href="/Products">Tất cả sản phẩm</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /BREADCRUMB -->
+	<!-- SECTION -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- ASIDE -->
+				<div id="aside" class="col-md-3">
+					<!-- aside Widget -->
+					@await Component.InvokeAsync("Sidebar")
+					<!-- /aside Widget -->
+					<!-- aside Widget -->
+					
+					<!-- /aside Widget -->
+					<!-- aside Widget -->
+					<div class="aside">
+						<h3 class="aside-title">Sản phẩm bán chạy</h3>
+						@await Html.PartialAsync("TopSellingProductsSidebar")
+					</div>
+					<!-- /aside Widget -->
+				</div>
+				<!-- /ASIDE -->
+				<!-- STORE -->
+				<div id="store" class="col-md-9">
+					<!-- store top filter -->
+					<!-- /store top filter -->
+					@RenderBody()
+					<!-- store products -->
+
+					<!-- /store products -->
+					<!-- store bottom filter -->
+					
+					<!-- /store bottom filter -->
+				</div>
+				<!-- /STORE -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+	<!-- NEWSLETTER -->
+	<div id="newsletter" class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="newsletter">
+						<p>Đăng ký để nhận <strong>Thư Mới</strong></p>
+						<form action="/Users/Subscribe">
+							<input class="input" type="email" name="email" placeholder="Nhập email">
+							<button class="newsletter-btn" type="submit" onclick="successFunction()"><i class="fa fa-envelope"></i> Đăng ký</button>
+						</form>
+						<ul class="newsletter-follow">
+							<li>
+								<a href="#"><i class="fa fa-facebook"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-instagram"></i></a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-pinterest"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /NEWSLETTER -->
+	<!-- FOOTER -->
+	@await Html.PartialAsync("_FooterPartial")
+	<!-- /FOOTER -->
+	<!-- jQuery Plugins -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/nouislider.min.js"></script>
+	<script src="/js/jquery.zoom.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		function successFunction() {
+			Swal.fire({
+				title: "Đăng ký thành công!",
+				icon: "success",
+				showConfirmButton: false
+			});
+		}
+	</script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

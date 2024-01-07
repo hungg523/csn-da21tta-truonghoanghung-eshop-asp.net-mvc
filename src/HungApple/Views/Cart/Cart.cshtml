@@ -1,0 +1,76 @@
+﻿@model Cart
+@{
+	ViewData["Title"] = "Giỏ hàng";
+}
+
+<div class="row">
+	<!-- Cart -->
+	<div class="cart-list">
+		<h2>Giỏ hàng của bạn!</h2>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th class="text-left">Hình ảnh</th>
+					<th class="text-left">Sản phẩm</th>
+					<th class="text-center">Giá</th>
+					<th class="text-center">Số lượng</th>
+					<th class="text-center">Xóa sản phẩm</th>
+					<th class="text-center" colspan="2">Tổng tiền</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if (Model?.Lines != null)
+				{
+					@foreach (var line in Model?.Lines)
+					{
+						<tr>
+							<td class="product-widget">
+								<div class="product-img"><img src="/Upload/Product/@line.Product.Image"></div>
+							</td>
+							<td class="text-left">@line.Product.Name</td>
+							<td class="text-center">@(line.Product.Price - line.Product.PriceDiscount)</td>
+							<td class="text-center">
+								<div class="qty-label">
+									<div class="input-number">
+										<input type="number" id="ipQuantity" value="@line.Quantity" readonly>
+										<a href="/Cart/AddToCart/?id=@line.Product.Id" class="qty-up" id="qty-up">+</a>
+										<a href="/Cart/DeFromCart/?id=@line.Product.Id" class="qty-down" id="qty-down">-</a>
+									</div>
+								</div>
+							<td class="text-center">
+								<a href="/Cart/RemoveFromCart/?id=@line.Product.Id" class="qty-up"><i class="fa fa-close"></i></a>
+							</td>
+							<td class="text-center">
+									@((line.Quantity * line.Product.Price) - (line.Quantity * line.Product.PriceDiscount))
+							</td>
+						</tr>
+					}
+				}
+			</tbody>
+		</table>
+		@* <div class="text-center">
+			<a class="btn btn-primary" href="/Products/Index">Tiếp tục mua sắm</a>
+		</div> *@
+		@if (Model?.Lines != null)
+		{
+			<div class="cart-summary">
+				<small>@Model?.Lines.Count sản phẩm đã chọn!</small>
+				<h5>Tổng thanh toán: @Model?.ComputeTotalValue() VND</h5>
+			</div>
+		}
+		else
+		{
+			<div class="cart-summary">
+				<small>0 sản phẩm đã chọn!</small>
+				<h5>Tổng thanh toán: 0 VND</h5>
+			</div>
+		}
+		<div class="cart-checkout" style="display: inline-block; 
+	width: calc(20% - 0px);
+    padding: 12px;
+    background-color: #D10024;
+    text-align: center;">
+			<a href="/Orders" style="color: #fff;font-weight: 900;-webkit-transition: 0.2s all;
+    transition: 0.2s all;">Thanh toán <i class="fa fa-arrow-circle-right"></i></a>
+		</div>
+	</div>

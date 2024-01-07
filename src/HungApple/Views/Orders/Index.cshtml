@@ -1,0 +1,155 @@
+﻿@model HungApple.Models.CartLine
+@using HungApple.Models
+@{
+    ViewData["Title"] = "Thanh toán";
+    var lstPayment = (List<Payment>)ViewBag.Payment;
+    var lstProvinces = (List<HungApple.Models.Provinces>)ViewBag.ListProvinces;
+    var lstDistricts = (List<HungApple.Models.Districts>)ViewBag.ListDistricts;
+    var lstWards = (List<HungApple.Models.Wards>)ViewBag.ListWards;
+    User user = (User)ViewBag.UserDetail;
+}
+
+<div class="col-md-7">
+    <!-- Billing Details -->
+    <div class="billing-details">
+        <div class="section-title">
+            <h3 class="title">Địa chỉ thanh toán</h3>
+        </div>
+        <form asp-action="Details">
+            <div class="form-group">
+                <input class="input" type="text" name="last-name" placeholder="Tài khoản" value="@user.Username">
+            </div>
+            <div class="form-group">
+                <input class="input" type="email" name="email" placeholder="Địa chỉ Email" value="@user.Email">
+            </div>
+            <div class="form-group">
+                <input class="input" type="text" name="address" placeholder="Số nhà, tòa nhà, tên đường">
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="sltProvinceId">
+                    <option>--Chọn Tỉnh/Thành phố--</option>
+                    @if (lstProvinces != null && lstProvinces.Count > 0)
+                    {
+                        foreach (var item in lstProvinces)
+                        {
+                            if (user.ProvinceId == item.province_id)
+                            {
+                                <option value="@item.province_id" selected>@item.province_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.province_id">@item.province_name</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="sltDistrictId">
+                    <option>--Chọn Quận/Huyện--</option>
+                    @if (lstDistricts != null && lstDistricts.Count > 0)
+                    {
+                        foreach (var item in lstDistricts)
+                        {
+                            if (user.DistrictId == item.district_id)
+                            {
+                                <option value="@item.district_id" selected>@item.district_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.district_id">@item.district_name</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="sltWardId">
+                    <option>--Chọn Phường/Xã--</option>
+                    @if (lstWards != null && lstWards.Count > 0)
+                    {
+                        foreach (var item in lstWards)
+                        {
+                            if (user.WardId == item.ward_id)
+                            {
+                                <option value="@item.ward_id" selected>@item.ward_name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.ward_id">@item.ward_name</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="input" type="tel" name="tel" placeholder="Số điện thoại" value="@user.Phone">
+            </div>
+        </form>
+    </div>
+    <!-- /Billing Details -->
+</div>
+
+<!-- Order Details -->
+<div class="col-md-5 order-details">
+    <div class="section-title text-center">
+        <h3 class="title">Đơn hàng của bạn</h3>
+    </div>
+    <div class="order-summary">
+        <div class="order-col">
+            <div><strong>SẢN PHẨM</strong></div>
+            <div><strong>TỔNG GIÁ</strong></div>
+        </div>
+        @if (Model != null && Model.Product.Id > 0 && Model.Quantity > 0)
+        {
+            var line = Model;          
+            <div class="order-products">
+                <div class="order-col">
+                    <div>@line.Quantity @line.Product.Name màu @line.Product.Color</div>
+                    <div>@(line.Product.Price - line.Product.PriceDiscount) VND</div>
+                </div>
+            </div>
+            <div class="order-col">
+                <div>Phí vận chuyển</div>
+                <div><strong>30000 VND</strong></div>
+            </div>
+            <div class="order-col">
+                <div><strong>Tổng cộng</strong></div>
+                <div><strong class="order-total">  @((line.Product.Price * line.Quantity) - (line.Quantity * line.Product.PriceDiscount) + 30000) VND</strong></div>
+            </div>
+        }
+        else
+        {
+            @await Component.InvokeAsync("CartOrder")
+        }
+    </div>
+    <div class="payment-method">
+        @if (lstPayment != null && lstPayment.Count > 0)
+        {
+            @foreach (var item in lstPayment)
+            {
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-@item.Id">
+                    <label for="payment-@item.Id">
+                        <span></span>
+                        @item.Name
+                    </label>
+                    <div class="caption">
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="input-checkbox">
+        <input type="checkbox" id="terms">
+        <label for="terms">
+            <span></span>
+            Tôi đã đọc và đồng ý với <a href="#">điều khoản & dịch vụ</a>
+        </label>
+    </div>
+    <a href="#" class="primary-btn order-submit">Thanh toán</a>
+</div>
+@section Scripts{
+    <script src="~/js/controller/users.js"></script>
+}

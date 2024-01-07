@@ -1,0 +1,25 @@
+﻿@model HungApple.Models.Category
+
+@{
+    ViewData["Title"] = "Chi tiết";
+    Layout = "_AdminPanel";
+}
+
+<h1><strong>CHI TIẾT DANH MỤC</strong></h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dd class="col-sm-10">
+            <h4>
+                <strong>@Html.DisplayNameFor(model => model.Name)</strong>:
+                @Html.DisplayFor(model => model.Name)
+            </h4>
+            
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="CategoriesEdit" asp-route-id="@Model?.Id" class="w3-button w3-blue w3-round" style="text-decoration:none;">Chỉnh sửa</a>
+    <a asp-action="CategoriesIndex" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trở về</a>
+</div>

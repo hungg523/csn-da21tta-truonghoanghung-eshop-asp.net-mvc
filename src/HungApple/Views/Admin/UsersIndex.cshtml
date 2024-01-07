@@ -1,0 +1,90 @@
+﻿@model IEnumerable<HungApple.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminPanel";
+}
+
+<h1><strong>QUẢN LÝ NGƯỜI DÙNG</strong></h1>
+
+@* <p>
+    <a asp-action="UsersCreate" class="w3-button w3-blue w3-round" style="text-decoration:none;">Thêm người dùng</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th >
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                Thông tin địa chỉ
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResetPasswordToken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResetPasswordExpiration)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Hành động
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a asp-action="UsersDelete" asp-route-id="@item.Id" style="text-decoration:none;">Xóa</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    @item.ProvinceName - @item.DistrictName - @item.WardName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResetPasswordToken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResetPasswordExpiration)
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+﻿@model HungApple.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_AdminPanel";
+}
+
+<h1><strong>CHI TIẾT NGƯỜI DÙNG</strong></h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ResetPasswordToken)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ResetPasswordToken)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ResetPasswordExpiration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ResetPasswordExpiration)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="UsersEdit" asp-route-id="@Model?.Id" class="w3-button w3-blue w3-round" style="text-decoration:none;">Chỉnh sửa</a> 
+    <a asp-action="UsersIndex" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trở về</a>
+</div>

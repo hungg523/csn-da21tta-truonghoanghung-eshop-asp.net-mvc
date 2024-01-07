@@ -1,0 +1,39 @@
+﻿@model IEnumerable<HungApple.Models.Category>
+@{
+	var controller = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+	var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+	var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
+	var param = string.Empty;
+	if(!string.IsNullOrEmpty(qsPath)){
+		param = qsPath.Replace("?category=", "");
+	}
+	var clActiveHome = (controller.Equals("home") ? "active" : "");
+	var clActivePr = ((string.IsNullOrEmpty(param) && controller.Equals("products")) ? "active" : "");
+}
+<nav id="navigation">
+	<!-- container -->
+	<div class="container">
+		<!-- responsive-nav -->
+		<div id="responsive-nav" class="hmenu">
+			<!-- NAV -->
+			<ul class="main-nav nav navbar-nav">
+				<li class="menu-tab @clActiveHome"><a href="/Home">Trang chủ</a></li>
+				<li class="menu-tab @clActivePr"><a href="/Products">Sản Phẩm</a></li>
+				
+				@foreach (var item in Model) {
+					var classActive = string.Empty;
+					if(!string.IsNullOrEmpty(param)){
+						param = param.ToLower().Trim();
+						if(param.Equals(item.Name.ToLower().Trim())){
+							classActive = "active";
+						}
+					}
+					<li class="menu-tab @classActive"><a href="@Url.Action("Filter", "Products", new { category = item.Name })">@item.Name</a></li>
+				}
+			</ul>
+			<!-- /NAV -->
+		</div>
+		<!-- /responsive-nav -->
+	</div>
+	<!-- /container -->
+</nav>

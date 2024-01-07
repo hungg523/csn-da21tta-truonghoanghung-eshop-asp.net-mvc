@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model HungApple.Models.Category
+
+@{
+    ViewData["Title"] = "Tạo mới danh mục";
+    Layout = "_AdminPanel";
+}
+
+<h1>TẠO MỚI DANH MỤC</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CategoriesCreate">
+            <div asp-validation-summary="ModelOnly" class="w3-opacity"></div>
+            <div class="form-group">
+                <strong><label asp-for="Name" class="w3-opacity"></label></strong>
+                <input asp-for="Name" class="w3-border w3-padding" />
+                <span asp-validation-for="Name" class="w3-opacity"></span>
+            </div>
+            <hr class="w3-clear" />
+            <div class="form-group">
+                <button type="submit" onclick="successFunction()" class="w3-button w3-blue w3-round">Thêm</button>
+                <a asp-action="CategoriesIndex" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function successFunction() {
+            Swal.fire({
+                title: "Hoàn tất!",
+                text: "Đã thêm danh mục!",
+                icon: "success",
+                showConfirmButton: false
+            });
+        }
+    </script>
+}

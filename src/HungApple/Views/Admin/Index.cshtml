@@ -1,0 +1,66 @@
+﻿@using HungApple.Models
+@model List<NewsLetterSubscription>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_AdminPanel";
+}
+<a href="/Home" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trang chủ</a>
+<h1>Danh sách đăng ký nhận thư mới</h1>
+<div class="w3-card w3-round w3-white">
+    <div style="padding: 20px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.Email</td>
+                            <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                        Hành động
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a asp-action="SubscriceDelete" asp-route-id="@item.Id" style="text-decoration:none;">Xóa</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <li class="page-item"> <a href="@Url.Action("Index", "Admin", new { page = ViewBag.CurrentPage - 1 })">Previous</a></li>
+                }
+                @for (var i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item">
+                        <a href="@Url.Action("Index", "Admin", new { page = i })" class="@(i == ViewBag.CurrentPage ? "selected" : "")">@i</a>
+                    </li>
+                }
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <li class="page-item"><a href="@Url.Action("Index", "Admin", new { page = ViewBag.CurrentPage + 1 })">Next</a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
