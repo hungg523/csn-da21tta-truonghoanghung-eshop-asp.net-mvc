@@ -1,0 +1,204 @@
+﻿@using HungApple.Models.ViewModels
+@model ProductListViewModel
+
+@{
+    ViewData["Title"] = "Sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <ul class="breadcrumb-tree">
+            <li><a href="/">Trang chủ</a></li>
+            <li class="active">Sản phẩm</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div id="aside" class="col-md-3">
+        @await Component.InvokeAsync("Sidebar")
+        @if (Model != null && Model.Product.Count() > 0)
+        {
+            <div style="margin-top:35px;">
+                <h3 class="aside-title">Sản phẩm bán chạy</h3>
+                @foreach (var item in Model.Product)
+                {
+                    @if (item.IsBestSeller)
+                    {
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="/Upload/Product/@item.Image" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Category.Name</p>
+                                <h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <h4 class="product-price">@(item.Price - item.PriceDiscount)</h4>
+
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+    @if (Model.Product != null)
+    {
+        <div id="store" class="col-md-9">
+            @foreach (var item in Model.Product)
+            {
+                <!-- product -->
+                <div class="col-md-4 col-xs-6">
+                    @if (item.IsSale && item.IsNew)
+                    {
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="/Upload/Product/@item.Image" alt="">
+                                <div class="product-label">
+                                    <span class="sale">-@((int)((item.PriceDiscount / item.Price) * 100))%</span>
+                                    <span class="new">NEW</span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Category.Name</p>
+                                <h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <h4 class="product-price">@(item.Price - item.PriceDiscount)<del class="product-old-price">@item.Price</del></h4>
+
+                            </div>
+                            <div class="add-to-cart">
+                                <form action="/Cart/AddToCart" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else if (item.IsSale)
+                    {
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="/Upload/Product/@item.Image" alt="">
+                                <div class="product-label">
+                                    <span class="sale">-@((int)((item.PriceDiscount / item.Price) * 100))%</span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Category.Name</p>
+                                <h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <h4 class="product-price">@(item.Price - item.PriceDiscount)<del class="product-old-price">@item.Price</del></h4>
+
+                            </div>
+                            <div class="add-to-cart">
+                                <form action="/Cart/AddToCart" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else if (item.IsNew)
+                    {
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="/Upload/Product/@item.Image" alt="">
+                                <div class="product-label">
+                                    <span class="new">NEW</span>
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Category.Name</p>
+                                <h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <h4 class="product-price">@item.Price</h4>
+
+                            </div>
+                            <div class="add-to-cart">
+                                <form action="/Cart/AddToCart" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else if (item.IsSale == false && item.IsNew == false)
+                    {
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="/Upload/Product/@item.Image" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">@item.Category.Name</p>
+                                <h3 class="product-name"><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <h4 class="product-price">@item.Price</h4>
+
+                            </div>
+                            <div class="add-to-cart">
+                                <form action="/Cart/AddToCart" method="post">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- /product -->
+            }
+        </div>
+    }
+    <div class="store-filter clearfix">
+        <ul class="store-pagination">
+            @if (Model.PagingInfo.CurrentPage > 1)
+            {
+                <li><a href="/Products/?productPage=@(Model.PagingInfo.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a></li>
+            }
+            @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+            {
+                @if (i == Model.PagingInfo.CurrentPage)
+                {
+                    <li class="active"><a href="/Products/?productPage=@i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="/Products/?productPage=@i">@i</a></li>
+                }
+            }
+            @if (Model.PagingInfo.CurrentPage != Model.PagingInfo.TotalPages)
+            {
+                <li><a href="/Products/?productPage=@(Model.PagingInfo.CurrentPage + 1)"><i class="fa fa-angle-right"></i></a></li>
+            }
+        </ul>
+    </div>
+    @* <ul class="pagination mb-sm-0">
+    <!-- Nút Previous -->
+    <li class="page-item" style="display:@(ViewBag.pageNumber == 1 ? "none" : "inline");">
+    <a asp-action="Index" asp-controller="Products" asp-route-pageNumber="@(ViewBag.pageNumber - 1)"
+    class="page-link btn-outline-info">
+    Trước
+    </a>
+    </li>
+
+    <!-- Các số trang -->
+    @for (var i = 1; i <= ViewBag.page; i++)
+    {
+    <li class="page-item @(ViewBag.pageNumber == i ? "active" : "")">
+    <a asp-action="Index" asp-controller="Products" asp-route-pageNumber="@i" class="page-link" style="border-radius: 30px !important; margin-left: 4px; margin-right: 4px;">@i</a>
+    </li>
+    }
+
+    <!-- Nút Next -->
+    <li class="page-item" style="display:@(ViewBag.pageNumber == ViewBag.page ? "none" : "inline");">
+    <a asp-action="Index" asp-controller="Products"
+    asp-route-pageNumber="@(ViewBag.pageNumber + 1)"
+    class="page-link btn-outline-info">
+    Sau
+    </a>
+    </li>
+    </ul> *@
+</div>
+
+

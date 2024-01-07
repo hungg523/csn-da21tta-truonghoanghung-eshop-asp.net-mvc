@@ -1,0 +1,63 @@
+﻿@model HungApple.Models.Category
+
+@{
+	ViewData["Title"] = "Chỉnh sửa";
+	Layout = "_AdminPanel";
+}
+
+<h1><strong>CHỈNH SỬA</strong></h1>
+
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="CategoriesEdit" onsubmit="editForm(event)" id="editForm">
+			<div asp-validation-summary="ModelOnly" class="w3-opacity"></div>
+			<input type="hidden" asp-for="Id" />
+			<div class="form-group">
+				<strong><label asp-for="Name" class="w3-opacity"></label></strong>
+				<input asp-for="Name" class="w3-border w3-padding" />
+				<span asp-validation-for="Name" class="w3-opacity"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Lưu" class="w3-button w3-blue w3-round" />
+				<a asp-action="CategoriesIndex" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trở về</a>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script>
+		function editForm(e) {
+			e.preventDefault();
+			Swal.fire({
+				title: "Bạn có muốn lưu những thay đổi?",
+				showDenyButton: true,
+				showCancelButton: true,
+				confirmButtonText: "Lưu",
+				denyButtonText: `Hủy`
+			}).then((result) => {
+				if (result.isConfirmed) {
+					const editForm = document.getElementById('editForm');
+					editForm.submit();
+					Swal.fire({
+						title: "Đã lưu!",
+						icon: "success",
+						showConfirmButton: false
+					});
+				} else if (result.isDenied) {
+					Swal.fire({
+						title: "Đã hủy!",
+						icon: "error",
+						showConfirmButton: false
+					});
+					setTimeout(function () {
+						window.location.href = '/Admin/CategoriesIndex';
+					}, 1500);
+				}
+			});
+		}
+	</script>
+}

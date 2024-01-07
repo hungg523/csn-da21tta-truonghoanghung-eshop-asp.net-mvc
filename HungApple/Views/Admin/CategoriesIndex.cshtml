@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HungApple.Models.Category>
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+    Layout = "_AdminPanel";
+}
+
+<h1><strong>QUẢN LÝ DANH MỤC</strong></h1>
+<p>
+    <a asp-action="CategoriesCreate" class="w3-button w3-blue w3-round" style="text-decoration:none;">Thêm danh mục</a>
+</p>
+<div class="w3-card w3-round w3-white">
+    <table class="table">
+        <thead class="table-success">
+            <tr>
+                <th colspan="2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Hành động
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a asp-action="CategoriesEdit" asp-route-id="@item.Id" style="text-decoration:none;">Chỉnh sửa</a>
+                                </li>
+                                <li>
+                                    <a asp-action="CategoriesDetails" asp-route-id="@item.Id" style="text-decoration:none;">Chi tiết</a>
+                                </li>
+                                <li>
+                                    <a asp-action="CategoriesDelete" asp-route-id="@item.Id" style="text-decoration:none;">Xóa</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\Hung DATA\DoanCSN\HungApple\HungApple\obj\Release\net6.0\PubTmp\Out\" />
+  <dbfullsql path="D:\Hung DATA\DoanCSN\HungApple\HungApple\obj\Release\net6.0\PubTmp\EFSQLScripts\HungApple.Data.HungAppleContext.sql" />
+</sitemanifest>

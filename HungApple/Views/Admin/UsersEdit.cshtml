@@ -1,0 +1,115 @@
+﻿@model HungApple.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_AdminPanel";
+    var lstProvinces = (List<HungApple.Models.Provinces>)ViewBag.ListProvinces;
+    var lstDistricts = (List<HungApple.Models.Districts>)ViewBag.ListDistricts;
+    var lstWards = (List<HungApple.Models.Wards>)ViewBag.ListWards;
+}
+
+<h1><strong>CHỈNH SỬA NGƯỜI DÙNG</strong></h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UsersEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResetPasswordToken" class="control-label"></label>
+                <input asp-for="ResetPasswordToken" class="form-control" />
+                <span asp-validation-for="ResetPasswordToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResetPasswordExpiration" class="control-label"></label>
+                <input asp-for="ResetPasswordExpiration" class="form-control" />
+                <span asp-validation-for="ResetPasswordExpiration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Tỉnh/Thành phố</label>
+                <select class="form-control" asp-for="@Model.ProvinceId" id="sltProvinceId">
+                    <option value="0">--Chọn tỉnh/tp--</option>
+                    @if (lstProvinces != null && lstProvinces.Count > 0)
+                    {
+                        foreach (var item in lstProvinces)
+                        {
+                            <option value="@item.province_id">@item.province_name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Quận/Huyện</label>
+                <select class="form-control" asp-for="@Model.DistrictId" id="sltDistrictId">
+                    <option value="0">--Chọn Quận/Huyện--</option>
+                    @if (lstDistricts != null && lstDistricts.Count > 0)
+                    {
+                        foreach (var item in lstDistricts)
+                        {
+                            <option value="@item.district_id">@item.district_name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Xã/Phường</label>
+                <select class="form-control" asp-for="@Model.WardId" id="sltWardId">
+                    <option value="0">--Chọn Xã/Phường--</option>
+                    @if (lstWards != null && lstWards.Count > 0)
+                    {
+                        foreach (var item in lstWards)
+                        {
+                            <option value="@item.ward_id">@item.ward_name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Ảnh</label>
+                <input type="file" class="form-control" name="fileImage">
+                @if (!string.IsNullOrEmpty(Model.ImagePath))
+                {
+                    <img src="/Upload/Avatar/@Model.ImagePath" alt="Ảnh đại diện" width="50" height="50" />
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="w3-button w3-blue w3-round" />
+                <a asp-action="UsersIndex" class="w3-button w3-blue w3-round" style="text-decoration:none;">Trở về</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/controller/users.js" asp-append-version="true"></script>
+}

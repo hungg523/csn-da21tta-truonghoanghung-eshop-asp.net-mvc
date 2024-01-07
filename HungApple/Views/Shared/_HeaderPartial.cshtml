@@ -1,0 +1,85 @@
+﻿@{
+	var userName = User.Identity.Name;
+	int userId = 0;
+	if (User != null && User.Claims != null && User.Claims.Count() > 0)
+	{
+		var users = User.Claims.FirstOrDefault();
+		userId = (users != null ? int.Parse(users.ValueType) : 0);
+	}
+}
+<style>
+	.dropdown-menu .text-weight-color{
+		color: #000;
+		font-weight: 600;
+		font-size: 13px;
+	}
+</style>
+<header>
+	<!-- TOP HEADER -->
+	<div id="top-header">
+		<div class="container">
+			<ul class="header-links pull-left">
+				<li><a href="#"><ion-icon name="call-outline"></ion-icon> +84 965106829</a></li>
+				<li><a href="#"><ion-icon name="mail-outline"></ion-icon> hoanghung52304.com</a></li>
+			</ul>
+			<ul class="header-links pull-right">
+				@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+				{
+					<li><a href="/Admin/Index"><ion-icon name="hammer-outline"></ion-icon> Admin Panel</a></li>
+				}
+				@if (User.Identity.IsAuthenticated)
+				{
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">@userName</a>
+						<ul class="dropdown-menu">
+							<li><a href="@Url.Action("Logout", "Users")" class="text-weight-color"><ion-icon name="log-out-outline"></ion-icon> Thoát</a></li>
+							<li><a href="/Users/Details?id=@userId" class="text-weight-color"><ion-icon name="person-outline"></ion-icon> Thông tin cá nhân </a></li>
+							<li><a href="/Users/ChangePassword" class="text-weight-color"><ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon> Thay đổi mật khẩu </a></li>
+						</ul>
+					</li>
+				}
+				else
+				{
+					<li><a href="@Url.Action("Login", "Users")"><ion-icon name="log-in-outline"></ion-icon> Đăng nhập</a></li>
+					<li><a href="@Url.Action("Register", "Users")"><ion-icon name="person-add-outline"></ion-icon> Đăng ký</a></li>
+				}
+
+			</ul>
+		</div>
+	</div>
+
+	<div id="header">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- LOGO -->
+				<div class="col-md-3">
+					<div class="header-logo">
+						<a href="/Home" class="logo">
+							<img src="~/img/logo/abv.png" />
+						</a>
+					</div>
+				</div>
+				<!-- /LOGO -->
+				@await Component.InvokeAsync("Search")
+				<!-- ACCOUNT -->
+				<div class="col-md-3 clearfix">
+					<div class="header-ctn">
+						<!-- Wishlist -->
+						<!-- /Wishlist -->
+						<!-- Cart -->
+						@await Component.InvokeAsync("CartWidget")
+						<!-- /Cart -->
+						<!-- Menu Toogle -->
+						<!-- /Menu Toogle -->
+					</div>
+				</div>
+				<!-- /ACCOUNT -->
+			</div>
+			<!-- row -->
+		</div>
+		<!-- container -->
+	</div>
+	<!-- /MAIN HEADER -->
+</header>

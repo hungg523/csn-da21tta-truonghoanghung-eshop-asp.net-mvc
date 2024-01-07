@@ -1,0 +1,97 @@
+﻿@model IEnumerable<HungApple.Models.Comment>
+@{
+    ViewData["Title"] = "IndexComment";
+    Layout = "~/Views/Shared/_AdminPanel.cshtml";
+}
+
+<h1><strong>QUẢN LÝ BÌNH LUẬN</strong></h1>
+<div class="w3-card w3-round w3-white">
+    <table class="table">
+        <thead class="table-success">
+            <tr>
+                <th>
+                    Tài khoản
+                </th>
+                <th>
+                    Sản phẩm
+                </th>
+                <th>
+                    Đánh giá (sao)
+                </th>
+                <th>
+                    Ngày đánh giá
+                </th>
+                <th>
+                    Bình luận
+                </th>            
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody class="w3-border w3-padding">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Hành động
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">   
+                                <li>
+                                    <a asp-action="CommentDelete" asp-route-id="@item.Id" style="text-decoration:none;">Xóa</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+            <ul class="pagination mb-sm-0">
+                <!-- Nút Previous -->
+                <li class="page-item" style="display:@(ViewBag.pageNumber == 1 ? "none" : "inline");">
+                    <a asp-action="IndexComment"
+                       asp-route-pageNumber="@(ViewBag.pageNumber - 1)"
+                       class="page-link btn-outline-info">
+                        Trước
+                    </a>
+                </li>
+
+                <!-- Các số trang -->
+                @for (var i = 1; i <= ViewBag.page; i++)
+                {
+                    <li class="page-item @(ViewBag.pageNumber == i ? "active" : "")">
+                        <a asp-action="IndexComment" asp-route-pageNumber="@i" class="page-link" style="border-radius: 30px !important; margin-left: 4px; margin-right: 4px;">@i</a>
+                    </li>
+                }
+
+                <!-- Nút Next -->
+                <li class="page-item" style="display:@(ViewBag.pageNumber == ViewBag.page ? "none" : "inline");">
+                    <a asp-action="IndexComment"
+                       asp-route-pageNumber="@(ViewBag.pageNumber + 1)"
+                       class="page-link btn-outline-info">
+                        Sau
+                    </a>
+                </li>
+            </ul>
+        </tbody>
+    </table>
+</div>
+
+
